@@ -1,15 +1,14 @@
 #include "string21.h"
 
-size_t s21_strspn(const char *str1, const char *str2) {
-  size_t count = 0;
+s21_size_t s21_strspn(const char *str1, const char *str2) {
+  s21_size_t i;
+  s21_size_t j;
 
-  for (str1; *str1 != '\0'; str1++) {
-    for (str2; *str2 != '\0'; str2++)
-      if (*str1 == *str2) break;
-    if (*str2 == '\0')
-      return count;
-    else
-      count++;
+  for (i = 0; str1[i]; i++) {
+    for (j = 0; str2[j]; j++) {
+      if (str2[j] == str1[i]) break;
+    }
+    if (!str2[j]) break;
   }
-  return count;
+  return (i);
 }

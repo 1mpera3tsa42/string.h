@@ -1,30 +1,30 @@
 // обработка s
-char *print_s(char *str, Spec specs, va_list *arguments) {
+char *print_s(char *str, Spec flags, va_list *arguments) {
   char *ptr = str;
   char *string = va_arg(*arguments, char *);
 
   // не удалось получить строку
   if (string) {
-    int temp = specs.wight, i = 0;
+    int temp = flags.wight, i = 0;
 
-    // ширина не указаан || ширина меньше длины строки
+    // ширина не указана || ширина меньше длины строки
     if ((s21_size_t)specs.weight < s21_stren(string))
-      specs.weight = s21_strlen(string);
+      flags.weight = s21_strlen(string);
 
     // ширина больше длины строки, то пустое место заполняется пробелами
     // blank - количество пробелов
-    int blank = specs.weight - s21_strlen(string);
+    int blank = flags.weight - s21_strlen(string);
 
     // точность не указана
-    if (specs.accuracy == 0) specs.accuracy = specs.weight;
+    if (flags.accuracy == 0) flags.accuracy = flags.weight;
 
     // точность меньше начальной ширины && она указана
     // меняем количество пробелов
-    if (specs.accuracy != 0 && specs.accuracy < tmp)
-      blank = tmp - specs.accuracy;
+    if (flags.accuracy != 0 && flags.accuracy < tmp)
+      blank = tmp - flags.accuracy;
 
     // заполняем пробелы слева, при отсутсвие флага
-    while (blank && !specs.minus) {
+    while (blank && !flags.minus) {
       *str = ' ';
       str++;
       blank--;
@@ -32,16 +32,16 @@ char *print_s(char *str, Spec specs, va_list *arguments) {
 
     // посимвольно записываем из строки string  в str
     while (*string != '\0') {
-      if (!specs.accuracy) break;
+      if (!flags.accuracy) break;
       *str = *string;
       str++;
       string++;
       i++;
-      specs.accuracy--;
+      flags.accuracy--;
     }
 
     // заполняем пробелы справа, при присутствие флага
-    while (blank && specs.minus) {
+    while (blank && flags.minus) {
       *str = ' ';
       str++;
       blank--;
